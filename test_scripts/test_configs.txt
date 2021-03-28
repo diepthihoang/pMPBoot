@@ -1,0 +1,46 @@
+START_PRELIMINARY_TESTS
+-s example.phy
+-s example.phy -m GTR+I+G
+-s example.phy -m MF
+-s example.phy -B 1000 -alrt 1000
+-s example.phy -p example.nex
+-s example.phy -p example.nex -m MF+MERGE
+-s example.phy -p example.nex -m MFP+MERGE -B 1000
+-s example.phy -m GTR+R4 -T AUTO
+-s example.phy -T 4
+-h
+END_PRELIMINARY_TESTS
+
+START_PARTITION_ALN
+example.phy example.nex
+d59_8.phy d59_8.nex
+d69_31.phy d69_31.nex
+END_PARTITION_ALN
+
+START_SINGLE_ALN
+d59_8.phy
+d69_31.phy
+example.phy
+prot_M126_27_269.phy
+END_SINGLE_ALN
+
+START_PARTITION_OPTIONS
+-sp
+-spp
+-spj
+END_PARTITION_OPTIONS
+
+START_GENERIC_OPTIONS
+-m TEST
+-m TESTNEW
+-m TEST -bb 10000 -alrt 1000 -lbp 1000
+-m TESTNEW -bb 10000 -alrt 1000 -lbp 1000
+-m TEST -b 100
+-m TESTNEW -b 100
+END_GENERIC_OPTIONS
+
+START_UNIVERSAL_OPTIONS
+-redo
+-seed 1
+-nt 1
+END_UNIVERSAL_OPTIONS
