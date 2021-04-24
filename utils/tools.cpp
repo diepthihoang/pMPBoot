@@ -572,6 +572,8 @@ void parseArg(int argc, char *argv[], Params &params) {
     params.bootstrap_spec = NULL;
     params.transfer_bootstrap = 0;
     params.mpboot2 = false;
+    params.mpboot2_relax_hclimb = false;
+
 
     params.aln_file = NULL;
     params.phylip_sequential_format = false;
@@ -1515,6 +1517,10 @@ void parseArg(int argc, char *argv[], Params &params) {
             }
             if (arg == "-mpboot2") {
                 params.mpboot2 = true;
+                continue;
+            }
+            if (arg == "-pmpbootstar") {
+                params.mpboot2_relax_hclimb = true;
                 continue;
             }
             if (arg=="-stats") {

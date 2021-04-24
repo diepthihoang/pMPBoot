@@ -465,7 +465,8 @@ public:
     */
     bool fai;
 
-    int mpboot2;
+    int mpboot2; // Diep: 2021-04-24, why 'int'?
+    bool mpboot2_relax_hclimb; // Diep: 2021-04-24, adding option for pMPBoot* (for convenience)
 
     /**
      *  Option to check memory consumption only

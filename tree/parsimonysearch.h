@@ -102,7 +102,10 @@ int PhyloTree::doParsimonySearch(ParsimonySearchParameters& s) {
     s.initializing.stop();
     int rc = -1;
     
-    if (rand() % 3 <= 1) rc = optimizeSubtreeParsimony<Move>
+    int hclimb_threshold = 5;
+    if(params->mpboot2_relax_hclimb) hclimb_threshold = 1;
+
+    if (rand() % 3 <= hclimb_threshold) rc = optimizeSubtreeParsimony<Move>
            (s, targets, per_thread_path_parsimony, context, true);
     else{
         rc = optimizeRandomSubtreeParsimony<Move>
@@ -330,7 +333,6 @@ int PhyloTree::optimizeRandomSubtreeParsimony(ParsimonySearchParameters& s,
                                         ParsimonyPathVector& per_thread_path_parsimony,
                                         PhyloTreeThreadingContext& context,
                                         bool rescore_when_done) {
-
     TimeKeeper timeSpent("optimizing");
     intptr_t branch_count        = targets.size();
     
