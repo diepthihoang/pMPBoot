@@ -4380,7 +4380,10 @@ void PhyloTree::computeBioNJ(Params &params) {
     double timeToWriteDistanceFile = 0.0;
     double timeToCalculateMatrix = 0.0;
 #ifdef _OPENMP
-    #ifdef CLANG_UNDER_VS
+	#if defined(UNIX) && defined(CLANG)
+		omp_set_max_active_levels(1);
+	#elif defined(CLANG_UNDER_VS)
+//    #ifdef CLANG_UNDER_VS
         omp_set_max_active_levels(1);
     #else
         omp_set_nested(true); // 't allow nested OpenMP parallelism
@@ -4413,7 +4416,10 @@ void PhyloTree::computeBioNJ(Params &params) {
     }
     #ifdef _OPENMP
         #pragma omp barrier
-        #ifdef CLANG_UNDER_VS
+		#if defined(UNIX) && defined(CLANG)
+			omp_set_max_active_levels(0);
+		#elif defined(CLANG_UNDER_VS)
+//        #ifdef CLANG_UNDER_VS
             omp_set_max_active_levels(0);
         #else
             omp_set_nested(false); // don't allow nested OpenMP parallelism
